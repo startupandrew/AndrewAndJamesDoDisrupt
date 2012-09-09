@@ -53,8 +53,19 @@
 
 <script type="text/javascript">
 
+  document.ontouchstart = function(event){
+    alert("start!");
+    event.preventDefault();
+  }
+
   //don't let the iPad document move around like crazy when we do gestures.
   document.ontouchmove = function(event){
+    alert("move!");
+    event.preventDefault();
+  }
+
+  document.ontouchend = function(event){
+    alert("end!");
     event.preventDefault();
   }
 
@@ -135,7 +146,7 @@
   }
   slideSlides(0);
 
-  
+
   var lastPos = null;
 
   $('#myCarousel').bind('swipemove',function(ev, evInf) {
