@@ -42,7 +42,7 @@
 <a href="#" onclick="pushToScreen()" class="button" style="position: absolute; left: 775px; top: 20px;">Show On Screen</a>
 
 <div style="width: 100%;">
-<div id="myCarousel" class="carousel slide" style="width: 720px; height: 540px; border: 1px solid black; margin: auto;" ontouchstart=touchStart ontouchmove=touchMove>
+<div id="myCarousel" class="carousel slide" style="width: 720px; height: 540px; border: 1px solid black; margin: auto;">
   <!-- Carousel items -->
   <div id="slideHolder" class="carousel-inner">
   </div>
@@ -52,22 +52,6 @@
 <!-- <a onclick="slideSlides(-1)">Left</a> <a onclick="slideSlides(1)">Right</a> -->
 
 <script type="text/javascript">
-
-  document.ontouchstart = function(event){
-    alert("start!");
-    event.preventDefault();
-  }
-
-  //don't let the iPad document move around like crazy when we do gestures.
-  document.ontouchmove = function(event){
-    alert("move!");
-    event.preventDefault();
-  }
-
-  document.ontouchend = function(event){
-    alert("end!");
-    event.preventDefault();
-  }
 
   //first, get the cookie if there is one
   var userCookie = $.cookie('usercookie');
@@ -150,7 +134,7 @@
   var lastPos = null;
 
   $('#myCarousel').bind('swipemove',function(ev, evInf) {
-    var newPos = {x: evInf.originalEvent.offsetX, y: evInf.originalEvent.offsetY};
+    var newPos = {x: evInf.originalEvent.pageX, y: evInf.originalEvent.pageY};
     if(lastPos != null) {
       userSlideDrawing.push({o: lastPos, n: newPos});
     }
@@ -189,6 +173,26 @@
     8
     return false;
 */
+  }
+
+
+  document.ontouchstart = function(event){
+    lastPos = null;
+    var x = event.touches[0].pageX;
+    alert(x);
+    event.preventDefault();
+  }
+
+  //don't let the iPad document move around like crazy when we do gestures.
+  document.ontouchmove = function(event){
+    var x = event.touches[0].pageX;
+    alert(x);
+    event.preventDefault();
+  }
+
+  document.ontouchend = function(event){
+    lastPos = null;
+    event.preventDefault();
   }
 
 
