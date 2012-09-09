@@ -5,53 +5,60 @@
   <script type="text/javascript" src="http://www.firebase.com/js/libs/jquery-1.7.1.js"></script>
   <script type="text/javascript" src="http://www.firebase.com/submarine/js/libs/json2.min.js"></script>
   <script type="text/javascript" src="jquery.cookie.js"></script>
+  <script type="text/javascript" src="displaycarousel.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/bootstrap-carousel.js"></script>
 
-  <!-- Adds the Filepicker.io javascript library to the page -->
-  <script src="https://api.filepicker.io/v0/filepicker.js"></script>
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/bootstrap-responsive.css" rel="stylesheet">
+  <link href="css/app.css" rel="stylesheet">
 </head>
 <body>
 
-This is what the ipad will see.
+<div id="myCarousel" class="carousel slide hide" style="width: 400px; height: 300px; border: 1px solid green;">
+  <!-- Carousel items -->
+  <div id="ccc" class="carousel-inner">
+  </div>
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
 
-
-
+<div id="imageshere"></div>
 <script type="text/javascript">
 
-  //first, get the cookie if there is one
-  var userCookie = $.cookie('usercookie');
+  //first, lets make up a screen id.
+  var screenId = '' + Math.floor(Math.random() * 10000);
 
-  //if there isn't one already, set it.
-  if(userCookie == null) {
-    userCookie = '' + Math.floor(Math.random() * 1000000000);
-    $.cookie('usercookie', userCookie);
+  //make sure to display leading "0"
+  while(screenId.length < 4) {
+    screenId = "0" + screenId;
   }
 
-  //Now create a Firebase reference to the user data.
-  var userDataRoot = new Firebase("http://gamma.firebase.com/unplugged/users/" + userCookie);
+  //Create a Firebase reference to the root of the data
+  var dataRoot = new Firebase("http://gamma.firebase.com/unplugged/")
 
-  //
-  var mySlides = userDataRoot.child("slides");
+  //Now create a Firebase reference to watch the screen ID
+  var screenRoot = dataRoot.child("screens").child(screenId);
 
-  //Setting up Filepicker.io with your api key
-  filepicker.setKey('ARQRH6T9hQi2MVv87Hnnfz');
-  function doit() {
-    filepicker.getFile('image/*', {'multiple': true}, function(response){
-      for(var i =0; i < response.length; i++) {
-        var img = response[i];
-        mySlides.push(img.url);
+  screenRoot.remove(function() {
+    var func = screenRoot.on("value", function(uidSnap) {
+      var uid = uidSnap.val();
+      if(uid != null) {
+        displayCarousel(dataRoot.child("users").child(uid));
+        screenRoot.off("value", func);
       }
     });
-  }
-
-  mySlides.on("child_added", function(d) {
-    $('#imageshere').prepend('<p>' + d.val() + '</p>');
   });
+
+  $('#myCarousel').carousel({
+    interval: false
+  });
+
+  //displayCarousel(dataRoot.child("users").child("125503113"));
+
+  $("#imageshere").prepend("<p>Enter Code: " + screenId + "</p>");
 </script>
 
-<a href="#" onclick="doit()">Click</a>
-
-<div id="imageshere">
-
-</div>
 </body>
 </html>
