@@ -34,6 +34,10 @@
 
 <script type="text/javascript">
 
+  document.ontouchmove = function(event){
+    event.preventDefault();
+  }
+
   //first, get the cookie if there is one
   var userCookie = $.cookie('usercookie');
 
@@ -106,6 +110,23 @@
     }
     slidePosRef.set(currentSlidePos);
   }
+
+
+  var lastPos = null;
+
+  $('#myCarousel').bind('swipemove',function(ev, evInf) {
+    var newPos = {x: evInf.delta[0].lastX, y: evInf.delta[0].lastY};
+    if(lastPos != null) {
+      console.log("qqq: " + newpos.x + " " + newPos.y)
+    }
+    lastPos = newPos;
+  });
+
+
+  $('#myCarousel').bind('shake',function(ev, evInf) {
+    //todo clear drawing
+  });
+
 
 </script>
 
