@@ -4,7 +4,7 @@
  * @constructor
  */
 
-var allSlides = [];
+
 
 displayCarousel = function(userdata, carousel, slideholder) {
 
@@ -12,6 +12,8 @@ displayCarousel = function(userdata, carousel, slideholder) {
   carousel.carousel({
     interval: false
   });
+
+  var allSlides = [];
 
   var slides = userdata.child("slides");
   slides.on("child_added", function(urlSnap) {
@@ -23,9 +25,9 @@ displayCarousel = function(userdata, carousel, slideholder) {
   });
 
   var currentSlide = userdata.child("position/slide");
-  currentSlide.on("value", function(psnap) {
+  currentSlide.on("value", function (psnap) {
     var curP = psnap.val();
-    if(curP != null) {
+    if (curP != null) {
       carousel.carousel(curP);
     }
   });
