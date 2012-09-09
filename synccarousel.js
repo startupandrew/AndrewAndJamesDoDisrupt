@@ -32,12 +32,11 @@ displayCarousel = function(userdata, carousel, slideholder) {
 }
 
 DrawableSlide = function(userdata, url, slideNum) {
-  var newSlide = $("<div class='item' style='width: 100%; height: 600px; position: relative;'></div>");
-  var con = $("<div></div>");
-  newSlide.append(con);
-  con.append("<img src='" + url + "' style='position: absolute; left: 0; top: 0; width: 100%; height: 100%;'>");
+  var newSlide = $("<div class='item' style='width: 100%; height: 100%;'></div>");
+  var cont = $("<div style='position: relative; height: 700px; width: 100%;'></div>")
+  cont.append("<img src='" + url + "' style='position: absolute; left: 0; top: 0; width: 100%; height: 100%;'>");
   var canv = $("<canvas style='position: absolute; left: 0; top: 0; width: 100%; height: 100%;' width=720 height=540></canvas>");
-  con.append(canv);
+  cont.append(canv);
 
   var c=canv.get(0);
   var ctx=c.getContext("2d");
@@ -51,6 +50,7 @@ DrawableSlide = function(userdata, url, slideNum) {
     ctx.stroke();
   });
 
+  newSlide.append(cont);
   this.slide = newSlide;
 }
 
