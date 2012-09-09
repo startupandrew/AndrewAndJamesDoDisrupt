@@ -1,0 +1,204 @@
+<html>
+<head>
+  <title>Unplugged - Create Your Slides</title>
+  <script type="text/javascript" src="http://static.firebase.com/v0/firebase.js"></script>
+  <script type="text/javascript" src="http://www.firebase.com/js/libs/jquery-1.7.1.js"></script>
+  <script type="text/javascript" src="http://www.firebase.com/submarine/js/libs/json2.min.js"></script>
+  <script type="text/javascript" src="js/jquery.cookie.js"></script>
+  <script type="text/javascript" src="synccarousel.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/bootstrap-carousel.js"></script>
+  <script type="text/javascript" src="js/jgestures.min.js"></script>
+
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/bootstrap-responsive.css" rel="stylesheet">
+  <link href="css/app.css" rel="stylesheet">
+
+  <!-- Adds the Filepicker.io javascript library to the page -->
+  <script src="https://api.filepicker.io/v0/filepicker.js"></script>
+
+  <style>
+    ul {
+      white-space: nowrap;
+      margin: 0;
+      padding:  0;
+    }
+
+    li {
+      /* or, for 'blockness': */
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+<div style="width: 100%; border-bottom: 3px solid black; margin-bottom: 5px;">
+<div style="height: 58px; width: 680px; overflow: auto; overflow-y: hidden;">
+  <ul id="imageshere">
+
+  </ul>
+</div>
+
+<a href="#" onclick="loadImages()" class="btn btn-primary" style="position: absolute; left: 697px; top: 12px;">Load Images</a>
+
+<a href="#" onclick="pushToScreen()" class="btn btn-success" style="position: absolute; left: 820px; top: 12px;">Show On Screen</a>
+
+</div>
+
+<div style="width: 100%;">
+<div id="myCarousel" class="carousel slide" style="width: 720px; height: 540px; border: 1px solid black; margin: auto;">
+  <!-- Carousel items -->
+  <div id="slideHolder" class="carousel-inner">
+  </div>
+</div>
+</div>
+
+<!-- <a onclick="slideSlides(-1)">Left</a> <a onclick="slideSlides(1)">Right</a> -->
+
+<script type="text/javascript">
+
+  //first, get the cookie if there is one
+  var userCookie = $.cookie('usercookie');
+
+  //if there isn't one already, set it.
+  if(userCookie == null) {
+    userCookie = '' + Math.floor(Math.random() * 1000000000);
+    $.cookie('usercookie', userCookie, { expires: 30 });
+  }
+
+  //Root of the firebase data
+  var dataRoot = new Firebase("http://gamma.firebase.com/unplugged/");
+
+  //Now create a Firebase reference to the user data.
+  var userDataRoot = dataRoot.child("users").child(userCookie);
+
+  //
+  var mySlides = userDataRoot.child("slides");
+
+  //Setting up Filepicker.io with your api key
+  filepicker.setKey('ARQRH6T9hQi2MVv87Hnnfz');
+
+  function loadImages() {
+    filepicker.getFile('image/*', {'multiple': true}, function(response){
+      for(var i =0; i < response.length; i++) {
+        var img = response[i];
+        mySlides.push(img.url);
+      }
+    });
+  }
+
+  var thumbnails = [];
+
+  mySlides.on("child_added", function(d) {
+    var curTN = thumbnails.length;
+    var tn = $('<li class="thumbnorm"><img src="' + d.val() + '" style="width: 72px; height: 54px;"></li>');
+    var cb = (function(sln) {
+      return function() {
+        currentSlidePos = sln;
+        slideSlides(0);
+        $(".thumblight").removeClass("thumblight");
+        thumbnails[sln].addClass("thumblight");
+      }
+    })(curTN);
+    tn.click(cb);
+
+    thumbnails.push(tn);
+    $('#imageshere').append(tn);
+  });
+
+  //show the carousel
+  displayCarousel(userDataRoot, $("#myCarousel"), $("#slideHolder"));
+
+  /**
+   * This gets called when the user tries to push data to the big screen by entering a code.
+   */
+  function pushToScreen() {
+    var screenId = prompt("What screen would you like to link to?");
+    var screenRoot = dataRoot.child("screens").child(screenId);
+    screenRoot.set(userCookie);
+  }
+
+  var currentSlidePos = 0;
+  var totalSlides = 1;
+
+  mySlides.on("value", function(s) {
+    totalSlides = 0;
+    s.forEach(function() {
+      totalSlides++;
+    });
+  });
+
+  var slidePosRef = userDataRoot.child("position/slide");
+
+  //And bind to swipe events
+  $('#myCarousel').bind('swipetwo',function(ev, evInf) {
+    if(evInf.description.indexOf("left") >= 0) {
+      slideSlides(1);
+    } else if(evInf.description.indexOf("right") >= 0) {
+      slideSlides(-1);
+    }
+  });
+
+  var userSlideDrawing = null;
+
+  function slideSlides(dir) {
+    currentSlidePos = (currentSlidePos + dir) % totalSlides;
+    if(currentSlidePos < 0) {
+      currentSlidePos = totalSlides + currentSlidePos;
+    }
+    slidePosRef.set(currentSlidePos);
+    userSlideDrawing = userDataRoot.child("drawings").child(currentSlidePos);
+  }
+  slideSlides(0);
+
+
+  var lastPos = null;
+
+  $('#myCarousel').bind('swipemove',function(ev, evInf) {
+
+  });
+
+  var lastPos = null;
+
+  //For desktop
+  $('#myCarousel').bind('swipemove',function(ev, evInf) {
+    if (evInf.originalEvent.offsetX != undefined) {
+      var newPos = {x:evInf.originalEvent.offsetX, y:evInf.originalEvent.offsetY};
+      if (lastPos != null && (newPos.x - evInf.delta[0].lastX) == lastPos.x) {
+        userSlideDrawing.push({o:lastPos, n:newPos});
+      }
+      lastPos = newPos;
+    }
+  });
+
+  //for ipad
+  document.ontouchstart = function(event){
+    lastPos = null;
+  }
+
+  //don't let the iPad document move around like crazy when we do gestures.
+  document.ontouchmove = function(event){
+
+    var x = event.touches[0].pageX - $("#myCarousel").offset().left;
+    var y = event.touches[0].pageY - $("#myCarousel").offset().top;
+
+    var newPos = {x: x, y: y};
+    if(lastPos != null) {
+      userSlideDrawing.push({o: lastPos, n: newPos});
+    }
+    lastPos = newPos;
+    event.preventDefault();
+  }
+
+  document.ontouchend = function(event){
+    lastPos = null;
+  }
+
+  $('#myCarousel').bind('tapthree',function(ev, evInf) {
+    userSlideDrawing.remove();
+  });
+
+</script>
+
+</body>
+</html>

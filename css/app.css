@@ -7,8 +7,9 @@
 .logo {
   margin: 30px 0;
 }
-.pronpt {
+.prompt {
   font-size: 16px;
+  font-weight: bold;
 }
 .codeEntry {
   font-size: 30px !important;
@@ -21,7 +22,7 @@
   background: #eee;
   margin-top: 10px;
   margin-bottom: 5px;
-  padding: 15px 0;
+  padding: 12px 0;
 }
 #number {
   font-weight: bold;
@@ -45,4 +46,15 @@
 }
 .or {
   padding-top: 10px;
+}
+
+
+/** These are for the creation page thumbnails */
+.thumbnorm {
+  border: 2px solid black;
+  width: 72px;
+  height: 54px;
+}
+.thumblight {
+  border: 2px solid red;
 }

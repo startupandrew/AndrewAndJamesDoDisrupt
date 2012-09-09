@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="204e4d92-bd6b-4bdc-b929-9fbe4b01574a" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/create.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/loadfiles.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/app.css" afterPath="$PROJECT_DIR$/css/app.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/synccarousel.js" afterPath="$PROJECT_DIR$/synccarousel.js" />
     </list>
     <ignored path="AndrewAndJamesDoDisrupt.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,7 +67,7 @@
       <file leaf-file-name="app.css" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/css/app.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="16" selection-start="708" selection-end="708" vertical-scroll-proportion="0.8528428">
+            <state line="59" column="0" selection-start="900" selection-end="900" vertical-scroll-proportion="1.4799331">
               <folding />
             </state>
           </provider>
@@ -72,8 +76,10 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="30" selection-start="2222" selection-end="2222" vertical-scroll-proportion="-17.375">
-              <folding />
+            <state line="57" column="30" selection-start="2221" selection-end="2221" vertical-scroll-proportion="-17.375">
+              <folding>
+                <marker date="1347207517000" expanded="true" signature="4260:4267" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -520,14 +526,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="30" selection-start="2222" selection-end="2222" vertical-scroll-proportion="-17.375">
-          <folding />
+        <state line="57" column="30" selection-start="2221" selection-end="2221" vertical-scroll-proportion="-17.375">
+          <folding>
+            <marker date="1347207517000" expanded="true" signature="4260:4267" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/app.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="16" selection-start="708" selection-end="708" vertical-scroll-proportion="0.8528428">
+        <state line="59" column="0" selection-start="900" selection-end="900" vertical-scroll-proportion="1.4799331">
           <folding />
         </state>
       </provider>
