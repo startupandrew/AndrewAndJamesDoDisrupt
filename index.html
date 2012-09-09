@@ -111,22 +111,19 @@
   var dataRoot = new Firebase("http://gamma.firebase.com/unplugged/")
 
 
+  $('input').keyup(function(e) {
+    if(e.which == 8) {
+      shiftFocus(e.currentTarget.id, -1);
+    }
+  });
+
   $('input').keypress(function(e) {
-    var a = [];
-    var k = e.which;
-
-    for (i = 46; i < 58; i++) {
-      a.push(i);
-    }
-
-    if (!(a.indexOf(k)>=0))
-    {
-      e.preventDefault();
-    }
-    else
+    if(e.which >= 48 && e.which <= 57)
     {
       //Move to the next textBox
-      shiftFocus(e.currentTarget.id);
+      shiftFocus(e.currentTarget.id, 1);
+    } else {
+      e.preventDefault();
     }
   });
 
@@ -149,14 +146,16 @@
 
   var entryBoxList = ["codeEntry1", "codeEntry2", "codeEntry3", "codeEntry4"];
 
-  function shiftFocus(fromField)
+  function shiftFocus(fromField, dir)
   {
     for ( var i = 0; i < entryBoxList.length; i++)
     {
       //Move focus to the next text box
-      if ( fromField === entryBoxList[i] )
+      if ( fromField === entryBoxList[i] && (i + dir) >= 0 && (i + dir) < entryBoxList.length)
       {
-        $("#" + entryBoxList[i+1]).focus();
+        var newBox =$("#" + entryBoxList[i+dir]);
+        newBox.val("");
+        newBox.focus();
       }
     }
   }
