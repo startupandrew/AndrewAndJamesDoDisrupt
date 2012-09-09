@@ -4,14 +4,25 @@
  * @constructor
  */
 
-displayCarousel = function(userdata, theDiv) {
-  $("imageshere").hide();
-  $(".carousel").show();
-  var self = this;
+displayCarousel = function(userdata, carousel, slideholder) {
+
+  //set up the carousel
+  carousel.carousel({
+    interval: false
+  });
+
   var slides = userdata.child("slides");
   slides.on("child_added", function(urlSnap) {
     var imgURL = urlSnap.val();
-    $("#ccc").append("<div class='item'><img src='" + imgURL + "' style='width: 300px; height: 250px;'></div>");
-    $("#myCarousel").carousel("next");
-  })
+    slideholder.append("<div class='item'><img src='" + imgURL + "' style='width: 100%; height: 100%;'></div>");
+    carousel.carousel("next");
+  });
+
+  var currentSlide = userdata.child("position/slide");
+  currentSlide.on("value", function(psnap) {
+    var curP = psnap.val();
+    if(curP != null) {
+      carousel.carousel(curP);
+    }
+  });
 }
