@@ -134,59 +134,39 @@
   var lastPos = null;
 
   $('#myCarousel').bind('swipemove',function(ev, evInf) {
-    var newPos = {x: evInf.originalEvent.pageX, y: evInf.originalEvent.pageY};
-    if(lastPos != null) {
-      userSlideDrawing.push({o: lastPos, n: newPos});
-    }
-    lastPos = newPos;
+
   });
 
+  var lastPos = null;
 
-  function touchStart( e ) {
-    alert("test");
-   /* 2
-    var box = document.getElementById("box");
-    3
-    box.style.background = "green";
-    4
-    e.preventDefault();
-    5
-    return false;
-    6*/
-  }
+  //For desktop
+  $('#myCarousel').bind('swipemove',function(ev, evInf) {
+    if (evInf.originalEvent.offsetX != undefined) {
+      var newPos = {x:evInf.originalEvent.offsetX, y:evInf.originalEvent.offsetY};
+      if (lastPos != null && (newPos.x - evInf.delta[0].lastX) == lastPos.x) {
+        userSlideDrawing.push({o:lastPos, n:newPos});
+      }
+      lastPos = newPos;
+    }
+  });
 
-
-  function touchMove( e ) {
-    alert("test");
-   /* 2
-    var targetEvent =  e.touches.item(0);
-    3
-    var box = document.getElementById("box");
-    4
-    box.style.background = "yellow";
-    5
-    box.style.left = targetEvent.clientX + "px";
-    6
-    box.style.top= targetEvent.clientY + "px";
-    7
-    e.preventDefault();
-    8
-    return false;
-*/
-  }
-
-
+  //for ipad
   document.ontouchstart = function(event){
     lastPos = null;
-    var x = event.touches[0].pageX;
-    alert(x);
     event.preventDefault();
   }
 
   //don't let the iPad document move around like crazy when we do gestures.
   document.ontouchmove = function(event){
-    var x = event.touches[0].pageX;
-    alert(x);
+
+    var x = event.touches[0].pageX - $("#myCarousel").offset().left;
+    var y = event.touches[0].pageY - $("#myCarousel").offset().top;
+
+    var newPos = {x: x, y: y};
+    if(lastPos != null) {
+      userSlideDrawing.push({o: lastPos, n: newPos});
+    }
+    lastPos = newPos;
     event.preventDefault();
   }
 
@@ -194,7 +174,6 @@
     lastPos = null;
     event.preventDefault();
   }
-
 
   $('#myCarousel').bind('tapthree',function(ev, evInf) {
     userSlideDrawing.remove();
