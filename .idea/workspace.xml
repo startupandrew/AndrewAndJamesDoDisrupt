@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="204e4d92-bd6b-4bdc-b929-9fbe4b01574a" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/img/plug.png" afterPath="$PROJECT_DIR$/img/plug.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/app.css" afterPath="$PROJECT_DIR$/css/app.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap.css" afterPath="$PROJECT_DIR$/css/bootstrap.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="AndrewAndJamesDoDisrupt.iws" />
@@ -64,36 +68,25 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="25" selection-start="1378" selection-end="1378" vertical-scroll-proportion="-3.62">
+            <state line="71" column="4" selection-start="2363" selection-end="2363" vertical-scroll-proportion="-3.62">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gen_validatorv4.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/gen_validatorv4.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1118" column="0" selection-start="27096" selection-end="27349" vertical-scroll-proportion="-2.0786026">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.css" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="app.css" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/css/app.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="7" selection-start="496" selection-end="496" vertical-scroll-proportion="0.0">
+            <state line="15" column="38" selection-start="222" selection-end="222" vertical-scroll-proportion="0.30991736">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bootstrap-responsive.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/bootstrap-responsive.css">
+      <file leaf-file-name="bootstrap.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/bootstrap.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="137" column="36" selection-start="2137" selection-end="2137" vertical-scroll-proportion="0.0">
+            <state line="1025" column="13" selection-start="14972" selection-end="14972" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -115,6 +108,7 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/css/index.html" />
         <option value="$PROJECT_DIR$/js/gen_validatorv4.js" />
+        <option value="$PROJECT_DIR$/css/bootstrap.css" />
         <option value="$PROJECT_DIR$/css/app.css" />
         <option value="$PROJECT_DIR$/index.html" />
       </list>
@@ -377,6 +371,24 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="DETECT_NESTED_COPIES" value="true" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="204e4d92-bd6b-4bdc-b929-9fbe4b01574a" name="Default" comment="" />
@@ -479,33 +491,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/gen_validatorv4.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1118" column="0" selection-start="27096" selection-end="27349" vertical-scroll-proportion="54.923077">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/css/bootstrap-responsive.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="137" column="36" selection-start="2137" selection-end="2137" vertical-scroll-proportion="0.0">
+        <state line="137" column="36" selection-start="2137" selection-end="2137" vertical-scroll-proportion="-18.152893">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/app.css">
+    <entry file="file://$PROJECT_DIR$/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="7" selection-start="496" selection-end="496" vertical-scroll-proportion="0.0">
+        <state line="1025" column="13" selection-start="14972" selection-end="14972" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="25" selection-start="1378" selection-end="1378" vertical-scroll-proportion="-3.62">
+        <state line="71" column="4" selection-start="2363" selection-end="2363" vertical-scroll-proportion="-3.62">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/gen_validatorv4.js">
+    <entry file="file://$PROJECT_DIR$/css/app.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1118" column="0" selection-start="27096" selection-end="27349" vertical-scroll-proportion="-2.0786026">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state line="15" column="38" selection-start="222" selection-end="222" vertical-scroll-proportion="0.30991736">
+          <folding />
         </state>
       </provider>
     </entry>

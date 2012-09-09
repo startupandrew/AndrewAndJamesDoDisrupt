@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Bootstrap, from Twitter</title>
+  <title>Unplugged!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="">
 
   <!-- Le styles -->
   <link href="css/bootstrap.css" rel="stylesheet">
@@ -22,7 +20,7 @@
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 
-  <!-- Le fav and touch icons -->
+  <!-- Fav and touch icons -->
   <link rel="shortcut icon" href="ico/favicon.ico">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
@@ -45,37 +43,60 @@
       <span class="pronpt">Enter Code:</span>
   </div>
   <div class="row pagination-centered">
-    <form id='codeEntryForm' name='codeEntryForm'>
-      <input type="text" id="codeEntry" name="codeEntry" />
-      <input type="submit" name="submit" value="Submit" />
-    </form>
-
-    <script  type="text/javascript">
-      var frmvalidator = new Validator("codeEntryForm");
-      frmvalidator.addValidation("codeEntry","maxlen=5");
-      frmvalidator.addValidation("codeEntry","numeric");
-    </script>
-
+    <input type="text" id="codeEntry1" class="codeEntry" name="codeEntry1" maxlength="1" />
+    <input type="text" id="codeEntry2" class="codeEntry" name="codeEntry2" maxlength="1" />
+    <input type="text" id="codeEntry3" class="codeEntry" name="codeEntry3" maxlength="1" />
+    <input type="text" id="codeEntry4" class="codeEntry" name="codeEntry4" maxlength="1" />
   </div>
 </div> <!-- /container -->
 
 <!-- Le javascript
 ================================================== -->
-<!-- Placed at the end of the document so the pages load faster
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap-transition.js"></script>
-<script src="js/bootstrap-alert.js"></script>
-<script src="js/bootstrap-modal.js"></script>
-<script src="js/bootstrap-dropdown.js"></script>
-<script src="js/bootstrap-scrollspy.js"></script>
-<script src="js/bootstrap-tab.js"></script>
-<script src="js/bootstrap-tooltip.js"></script>
-<script src="js/bootstrap-popover.js"></script>
-<script src="js/bootstrap-button.js"></script>
-<script src="js/bootstrap-collapse.js"></script>
-<script src="js/bootstrap-carousel.js"></script>
-<script src="js/bootstrap-typeahead.js"></script>      -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script type="text/javascript">
+  $('input').keypress(function(e) {
+    var a = [];
+    var k = e.which;
 
+    for (i = 48; i < 58; i++) {
+      a.push(i);
+    }
 
+    if (!(a.indexOf(k)>=0))
+    {
+      e.preventDefault();
+    }
+
+    //Move to the next textBox
+    console.log(e.keyCode);
+
+    var gotoNext = true;
+    if (e.keyCode === 12)
+    {
+      gotoNext = false;
+    }
+
+    shiftFocus(e.currentTarget.id, gotoNext);
+
+  });
+
+  var entryBoxList = ["codeEntry1", "codeEntry2", "codeEntry3", "codeEntry4"];
+
+  function shiftFocus(fromField, gotoNext)
+  {
+    for ( var i = 0; i < entryBoxList.length; i++)
+    {
+      if ( fromField === entryBoxList[i] )
+      {
+        $("#" + entryBoxList[i+1]).focus();
+      }
+    }
+  }
+
+  $(function(){
+    $("#" + entryBoxList[0]).focus();
+  });
+
+</script>
 </body>
 </html>
