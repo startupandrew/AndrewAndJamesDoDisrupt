@@ -59,7 +59,7 @@
   //if there isn't one already, set it.
   if(userCookie == null) {
     userCookie = '' + Math.floor(Math.random() * 1000000000);
-    $.cookie('usercookie', userCookie);
+    $.cookie('usercookie', userCookie, { expires: 30 });
   }
 
   //Root of the firebase data
@@ -153,7 +153,6 @@
   //for ipad
   document.ontouchstart = function(event){
     lastPos = null;
-    event.preventDefault();
   }
 
   //don't let the iPad document move around like crazy when we do gestures.
@@ -172,13 +171,11 @@
 
   document.ontouchend = function(event){
     lastPos = null;
-    event.preventDefault();
   }
 
   $('#myCarousel').bind('tapthree',function(ev, evInf) {
     userSlideDrawing.remove();
   });
-
 
 </script>
 
