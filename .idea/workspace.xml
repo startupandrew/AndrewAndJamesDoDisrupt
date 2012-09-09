@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="204e4d92-bd6b-4bdc-b929-9fbe4b01574a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/create.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/loadfiles.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/app.css" afterPath="$PROJECT_DIR$/css/app.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/synccarousel.js" afterPath="$PROJECT_DIR$/synccarousel.js" />
-    </list>
+    <list default="true" id="204e4d92-bd6b-4bdc-b929-9fbe4b01574a" name="Default" comment="" />
     <ignored path="AndrewAndJamesDoDisrupt.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
