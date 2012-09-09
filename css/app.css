@@ -47,3 +47,14 @@
 .or {
   padding-top: 20px;
 }
+
+
+/** These are for the creation page thumbnails */
+.thumbnorm {
+  border: 2px solid black;
+  width: 72px;
+  height: 54px;
+}
+.thumblight {
+  border: 2px solid red;
+}
