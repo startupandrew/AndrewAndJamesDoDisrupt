@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Unplugged</title>
+  <title>Unplugged - Create Your Slides</title>
   <script type="text/javascript" src="http://static.firebase.com/v0/firebase.js"></script>
   <script type="text/javascript" src="http://www.firebase.com/js/libs/jquery-1.7.1.js"></script>
   <script type="text/javascript" src="http://www.firebase.com/submarine/js/libs/json2.min.js"></script>
@@ -20,10 +20,11 @@
   <style>
     ul {
       white-space: nowrap;
+      margin: 0;
+      padding:  0;
     }
 
     li {
-      display: inline;
       /* or, for 'blockness': */
       display: inline-block;
     }
@@ -31,15 +32,15 @@
 </head>
 <body>
 
-<div style="border: 1px solid black; height: 64px; width: 650px; overflow: auto; overflow-y: hidden;">
+<div style="height: 58px; width: 680px; overflow: auto; overflow-y: hidden;">
   <ul id="imageshere">
 
   </ul>
 </div>
 
-<a href="#" onclick="loadImages()" class="button" style="position: absolute; left: 670px; top: 20px;">Load Images</a>
+<a href="#" onclick="loadImages()" class="btn btn-primary" style="position: absolute; left: 690px; top: 20px;">Load Images</a>
 
-<a href="#" onclick="pushToScreen()" class="button" style="position: absolute; left: 775px; top: 20px;">Show On Screen</a>
+<a href="#" onclick="pushToScreen()" class="btn btn-success" style="position: absolute; left: 810px; top: 20px;">Show On Screen</a>
 
 <div style="width: 100%;">
 <div id="myCarousel" class="carousel slide" style="width: 720px; height: 540px; border: 1px solid black; margin: auto;">
@@ -83,13 +84,6 @@
     });
   }
 
-  function pushToScreen() {
-
-    var screenId = prompt("What screen would you like to link to?");
-    var screenRoot = dataRoot.child("screens").child(screenId);
-    screenRoot.set(userCookie);
-  }
-
   var thumbnails = [];
 
   mySlides.on("child_added", function(d) {
@@ -111,6 +105,15 @@
 
   //show the carousel
   displayCarousel(userDataRoot, $("#myCarousel"), $("#slideHolder"));
+
+  /**
+   * This gets called when the user tries to push data to the big screen by entering a code.
+   */
+  function pushToScreen() {
+    var screenId = prompt("What screen would you like to link to?");
+    var screenRoot = dataRoot.child("screens").child(screenId);
+    screenRoot.set(userCookie);
+  }
 
   var currentSlidePos = 0;
   var totalSlides = 1;
