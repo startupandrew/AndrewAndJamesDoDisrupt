@@ -103,7 +103,7 @@
   displayCarousel(userDataRoot, $("#myCarousel"), $("#slideHolder"));
 
   var currentSlidePos = 0;
-  var totalSlides = 0;
+  var totalSlides = 1;
 
   mySlides.on("value", function(s) {
     totalSlides = 0;
@@ -113,7 +113,6 @@
   });
 
   var slidePosRef = userDataRoot.child("position/slide");
-  slidePosRef.set(currentSlidePos);
 
   //And bind to swipe events
   $('#myCarousel').bind('swipetwo',function(ev, evInf) {
@@ -124,28 +123,33 @@
     }
   });
 
+  var userSlideDrawing = null;
+
   function slideSlides(dir) {
     currentSlidePos = (currentSlidePos + dir) % totalSlides;
     if(currentSlidePos < 0) {
       currentSlidePos = totalSlides + currentSlidePos;
     }
     slidePosRef.set(currentSlidePos);
+    userSlideDrawing = userDataRoot.child("drawings").child(currentSlidePos);
   }
-
+  slideSlides(0);
 
   var lastPos = null;
+
 
   $('#myCarousel').bind('swipemove',function(ev, evInf) {
     var newPos = {x: evInf.delta[0].lastX, y: evInf.delta[0].lastY};
     if(lastPos != null) {
-      console.log("qqq: " + newpos.x + " " + newPos.y)
+      console.log("qqq: " + newPos.x + " " + newPos.y)
+      userSlideDrawing.push({old: lastPos, new: newPos});
     }
     lastPos = newPos;
   });
 
 
   $('#myCarousel').bind('shake',function(ev, evInf) {
-    //todo clear drawing
+    userSlideDrawing.remove();
   });
 
 
