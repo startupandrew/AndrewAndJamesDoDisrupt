@@ -42,7 +42,7 @@
 <a href="#" onclick="pushToScreen()" class="button" style="position: absolute; left: 775px; top: 20px;">Show On Screen</a>
 
 <div style="width: 100%;">
-<div id="myCarousel" class="carousel slide" style="width: 720px; height: 540px; border: 1px solid black; margin: auto;">
+<div id="myCarousel" class="carousel slide" style="width: 720px; height: 540px; border: 1px solid black; margin: auto;" ontouchstart=touchStart ontouchmove=touchMove>
   <!-- Carousel items -->
   <div id="slideHolder" class="carousel-inner">
   </div>
@@ -135,15 +135,50 @@
   }
   slideSlides(0);
 
+  
   var lastPos = null;
 
   $('#myCarousel').bind('swipemove',function(ev, evInf) {
     var newPos = {x: evInf.originalEvent.offsetX, y: evInf.originalEvent.offsetY};
-    if(last != null) {
+    if(lastPos != null) {
       userSlideDrawing.push({o: lastPos, n: newPos});
     }
     lastPos = newPos;
   });
+
+
+  function touchStart( e ) {
+    alert("test");
+   /* 2
+    var box = document.getElementById("box");
+    3
+    box.style.background = "green";
+    4
+    e.preventDefault();
+    5
+    return false;
+    6*/
+  }
+
+
+  function touchMove( e ) {
+    alert("test");
+   /* 2
+    var targetEvent =  e.touches.item(0);
+    3
+    var box = document.getElementById("box");
+    4
+    box.style.background = "yellow";
+    5
+    box.style.left = targetEvent.clientX + "px";
+    6
+    box.style.top= targetEvent.clientY + "px";
+    7
+    e.preventDefault();
+    8
+    return false;
+*/
+  }
 
 
   $('#myCarousel').bind('tapthree',function(ev, evInf) {
