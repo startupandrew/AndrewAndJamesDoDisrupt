@@ -5,7 +5,7 @@
  */
 
 .logo {
-  margin: 50px 0;
+  margin: 30px 0;
 }
 .prompt {
   font-size: 16px;
@@ -20,9 +20,9 @@
   border-radius: 10px;
   border: 1px solid #ccc;
   background: #eee;
-  margin-top: 20px;
+  margin-top: 15px;
   margin-bottom: 5px;
-  padding: 15px 0;
+  padding: 12px 0;
 }
 #number {
   font-weight: bold;
@@ -45,7 +45,7 @@
   padding-top: 19px;
 }
 .or {
-  padding-top: 20px;
+  padding-top: 15px;
 }
 
 

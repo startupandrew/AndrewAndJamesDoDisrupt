@@ -41,6 +41,7 @@ DrawableSlide = function(userdata, url, slideNum) {
   var c=canv.get(0);
   var ctx=c.getContext("2d");
   ctx.strokeStyle="#FF0000";
+  ctx.lineWidth = 5;
 
   userdata.child("drawings").child(slideNum).on("child_added", function(snap) {
     var line = snap.val();
