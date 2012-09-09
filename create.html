@@ -16,24 +16,44 @@
 
   <!-- Adds the Filepicker.io javascript library to the page -->
   <script src="https://api.filepicker.io/v0/filepicker.js"></script>
+
+  <style>
+    ul {
+      white-space: nowrap;
+    }
+
+    li {
+      display: inline;
+      /* or, for 'blockness': */
+      display: inline-block;
+    }
+  </style>
 </head>
 <body>
 
-<div id="imageshere" style="border: 1px solid green; height: 48px; width: 98%;"></div>
-<a href="#" onclick="loadImages()">Load Images</a> <br />
+<div style="border: 1px solid black; height: 64px; width: 450px; overflow: auto; overflow-y: hidden;">
+  <ul id="imageshere">
 
-<input type="text" id="screenid" /> <a href="#" onclick="pushToScreen()">Show On Screen</a>
+  </ul>
+</div>
 
-<div id="myCarousel" class="carousel slide" style="width: 480px; height: 360px; border: 1px solid black;">
+<a href="#" onclick="loadImages()" style="position: fixed; left: 465px; top: 20px;">Load Images</a>
+
+<a href="#" onclick="pushToScreen()" style="position: fixed; left: 565px; top: 20px;">Show On Screen</a>
+
+<div style="width: 100%;">
+<div id="myCarousel" class="carousel slide" style="width: 640px; height: 480px; border: 1px solid black; margin: auto;">
   <!-- Carousel items -->
   <div id="slideHolder" class="carousel-inner">
   </div>
 </div>
+</div>
 
-<a onclick="slideSlides(-1)">Left</a> <a onclick="slideSlides(1)">Right</a>
+<!-- <a onclick="slideSlides(-1)">Left</a> <a onclick="slideSlides(1)">Right</a> -->
 
 <script type="text/javascript">
 
+  //don't let the iPad document move around like crazy when we do gestures.
   document.ontouchmove = function(event){
     event.preventDefault();
   }
@@ -69,13 +89,14 @@
   }
 
   function pushToScreen() {
-    var screenId = $("#screenid").val();
+
+    var screenId = prompt("What screen would you like to link to?");
     var screenRoot = dataRoot.child("screens").child(screenId);
     screenRoot.set(userCookie);
   }
 
   mySlides.on("child_added", function(d) {
-    $('#imageshere').append('<img src="' + d.val() + '" style="width: 64px; height: 48px;">');
+    $('#imageshere').append('<li><img src="' + d.val() + '" style="width: 72px; height: 54px;"></li>');
   });
 
   //show the carousel
