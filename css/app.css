@@ -20,6 +20,22 @@
   border: 1px solid #ccc;
   background: #eee;
   margin-top: 35px;
-  margin-bottom: 35px;
+  margin-bottom: 5px;
   padding: 15px 0;
+}
+#number {
+  font-weight: bold;
+  font-size: 40px;
+  letter-spacing: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.bottom {
+  border-top: 1px solid #ccc;
+  margin-top: 80px;
+}
+.bottom p {
+  padding: 5px;
+  font-size: 12px;
+  color: #777;
 }
