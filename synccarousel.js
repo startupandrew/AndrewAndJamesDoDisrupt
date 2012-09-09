@@ -46,8 +46,8 @@ DrawableSlide = function(userdata, url, slideNum) {
   userdata.child("drawings").child(slideNum).on("child_added", function(snap) {
     var line = snap.val();
 
-    ctx.moveTo(line.old.x,line.old.y);
-    ctx.lineTo(line.new.x,line.new.y);
+    ctx.moveTo(line.o.x,line.o.y);
+    ctx.lineTo(line.n.x,line.n.y);
     ctx.stroke();
   });
 

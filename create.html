@@ -135,14 +135,10 @@
   }
   slideSlides(0);
 
-  var lastPos = null;
-
   $('#myCarousel').bind('swipemove',function(ev, evInf) {
     var newPos = {x: evInf.originalEvent.offsetX, y: evInf.originalEvent.offsetY};
-    if(lastPos != null && (lastPos.x + evInf.delta[0].lastX) === newPos.x) {
-      userSlideDrawing.push({old: lastPos, new: newPos});
-    }
-    lastPos = newPos;
+    var oldPos = {x: newPos.x - evInf.delta[0].lastX, y: newPos.y - evInf.delta[0].lastY};
+    userSlideDrawing.push({o: oldPos, n: newPos});
   });
 
 
