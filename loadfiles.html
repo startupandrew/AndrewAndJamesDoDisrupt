@@ -4,10 +4,11 @@
   <script type="text/javascript" src="http://static.firebase.com/v0/firebase.js"></script>
   <script type="text/javascript" src="http://www.firebase.com/js/libs/jquery-1.7.1.js"></script>
   <script type="text/javascript" src="http://www.firebase.com/submarine/js/libs/json2.min.js"></script>
-  <script type="text/javascript" src="jquery.cookie.js"></script>
+  <script type="text/javascript" src="js/jquery.cookie.js"></script>
   <script type="text/javascript" src="synccarousel.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/bootstrap-carousel.js"></script>
+  <script type="text/javascript" src="js/jgestures.min.js"></script>
 
   <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -23,6 +24,15 @@
 
 <input type="text" id="screenid" /><br />
 <a href="#" onclick="pushToScreen()">Show On Screen</a>
+
+<div id="myCarousel" class="carousel slide" style="width: 400px; height: 300px; border: 1px solid green;">
+  <!-- Carousel items -->
+  <div id="slideHolder" class="carousel-inner">
+  </div>
+  <!-- Carousel nav -->
+  <a class="carousel-control left" onclick="slideSlides(-1)">&lsaquo;</a>
+  <a class="carousel-control right" onclick="slideSlides(1)">&rsaquo;</a>
+</div>
 
 <script type="text/javascript">
 
@@ -65,11 +75,41 @@
   mySlides.on("child_added", function(d) {
     $('#imageshere').prepend('<p>' + d.val() + '</p>');
   });
+
+  //show the carousel
+  displayCarousel(userDataRoot, $("#myCarousel"), $("#slideHolder"));
+
+  var currentSlidePos = 0;
+  var totalSlides = 0;
+
+  mySlides.on("value", function(s) {
+    totalSlides = 0;
+    s.forEach(function() {
+      totalSlides++;
+    });
+  });
+
+  var slidePosRef = userDataRoot.child("position/slide");
+ // slidePosRef.set(currentSlidePos);
+
+  //And bind to swipe events
+  $('#myCarousel').bind('swipeone',function(ev, evInf) {
+    if(evInf.description.indexOf("left") >= 0) {
+      slideSlides(-1);
+    } else if(evInf.description.indexOf("right") >= 0) {
+      slideSlides(1);
+    }
+  });
+
+  function slideSlides(dir) {
+    currentSlidePos = (currentSlidePos + dir) % totalSlides;
+    if(currentSlidePos < 0) {
+      currentSlidePos = totalSlides + currentSlidePos;
+    }
+    slidePosRef.set(currentSlidePos);
+  }
+
 </script>
-
-
-
-
 
 </body>
 </html>

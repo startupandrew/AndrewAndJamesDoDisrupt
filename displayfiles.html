@@ -4,7 +4,7 @@
   <script type="text/javascript" src="http://static.firebase.com/v0/firebase.js"></script>
   <script type="text/javascript" src="http://www.firebase.com/js/libs/jquery-1.7.1.js"></script>
   <script type="text/javascript" src="http://www.firebase.com/submarine/js/libs/json2.min.js"></script>
-  <script type="text/javascript" src="jquery.cookie.js"></script>
+  <script type="text/javascript" src="js/jquery.cookie.js"></script>
   <script type="text/javascript" src="synccarousel.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/bootstrap-carousel.js"></script>
@@ -17,14 +17,16 @@
 
 <div id="myCarousel" class="carousel slide hide" style="width: 400px; height: 300px; border: 1px solid green;">
   <!-- Carousel items -->
-  <div id="ccc" class="carousel-inner">
+  <div id="slideHolder" class="carousel-inner">
   </div>
   <!-- Carousel nav -->
   <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
   <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 </div>
 
-<div id="imageshere"></div>
+<div id="screencodeholder"></div>
+
+
 <script type="text/javascript">
 
   //first, lets make up a screen id.
@@ -35,29 +37,31 @@
     screenId = "0" + screenId;
   }
 
+  $("#screencodeholder").prepend("<p>Enter Code: " + screenId + "</p>");
+
   //Create a Firebase reference to the root of the data
   var dataRoot = new Firebase("http://gamma.firebase.com/unplugged/")
 
   //Now create a Firebase reference to watch the screen ID
   var screenRoot = dataRoot.child("screens").child(screenId);
 
+  
   screenRoot.remove(function() {
     var func = screenRoot.on("value", function(uidSnap) {
       var uid = uidSnap.val();
       if(uid != null) {
-        displayCarousel(dataRoot.child("users").child(uid));
+        $("#screencodeholder").hide();
+        $("#myCarousel").show();
+        displayCarousel(dataRoot.child("users").child(uid), $("#myCarousel"), $("#slideHolder"));
         screenRoot.off("value", func);
       }
     });
   });
 
-  $('#myCarousel').carousel({
-    interval: false
-  });
 
-  //displayCarousel(dataRoot.child("users").child("125503113"));
+//  $("#myCarousel").show();
+//  displayCarousel(dataRoot.child("users").child("125503113"), $("#myCarousel"), $("#slideHolder"));
 
-  $("#imageshere").prepend("<p>Enter Code: " + screenId + "</p>");
 </script>
 
 </body>
