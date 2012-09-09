@@ -3,6 +3,15 @@
 <head>
   <meta charset="utf-8">
   <title>Unplugged!</title>
+
+  <script type="text/javascript" src="http://static.firebase.com/v0/firebase.js"></script>
+  <script type="text/javascript" src="http://www.firebase.com/js/libs/jquery-1.7.1.js"></script>
+  <script type="text/javascript" src="http://www.firebase.com/submarine/js/libs/json2.min.js"></script>
+  <script type="text/javascript" src="js/jquery.cookie.js"></script>
+  <script type="text/javascript" src="synccarousel.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/bootstrap-carousel.js"></script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Le styles -->
@@ -28,23 +37,24 @@
 
 <body>
 
-<div class="container">
+<div id="initContainer" class="container">
   <div class="row pagination-centered">
       <img src="img/plug.png" class="logo" />
   </div>
+
   <div class="row">
     <span class="span6 offset3 pagination-centered mainOutline">
+      <p class="pronpt">Start controlling this screen!:</p>
+      <p id="number"></p>
+    </span>
+  </div>
+  <div class="row">
+    <span id="loadByCode" class="span6 offset3 pagination-centered mainOutline">
       <p class="pronpt">Join a presentation by entering your code:</p>
       <input type="text" id="codeEntry1" class="codeEntry" name="codeEntry1" maxlength="1" />
       <input type="text" id="codeEntry2" class="codeEntry" name="codeEntry2" maxlength="1" />
       <input type="text" id="codeEntry3" class="codeEntry" name="codeEntry3" maxlength="1" />
       <input type="text" id="codeEntry4" class="codeEntry" name="codeEntry4" maxlength="1" />
-    </span>
-  </div>
-  <div class="row">
-    <span class="span6 offset3 pagination-centered mainOutline">
-      <p class="pronpt">Start controlling this screen!:</p>
-      <p id="number">1234</p>
     </span>
   </div>
 
@@ -63,10 +73,29 @@
 
 </div> <!-- /container -->
 
-<!-- Le javascript
-================================================== -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<div id="carouselContainer" class="hide">
+<div id="myCarousel" class="carousel slide" style="width: 640px; height: 480px; border: 1px solid black;">
+  <!-- Carousel items -->
+  <div id="slideHolder" class="carousel-inner">
+  </div>
+</div>
+</div>
+
+
 <script type="text/javascript">
+
+  //first, lets make up a screen id.
+  var screenId = '' + Math.floor(Math.random() * 10000);
+
+  //make sure to display leading "0"
+  while(screenId.length < 4) {
+    screenId = "0" + screenId;
+  }
+
+  //Create a Firebase reference to the root of the data
+  var dataRoot = new Firebase("http://gamma.firebase.com/unplugged/")
+
+
   $('input').keypress(function(e) {
     var a = [];
     var k = e.which;
@@ -121,10 +150,53 @@
     $("#" + entryBoxList[0]).focus();
   });
 
+
   function loadPresentation(presentationCode) {
-    //TODO: Andrew, put the code to run the presentation here.
-    console.log(presentationCode);
+    //Hide the input box.
+    $("#loadByCode").hide();
+
+    //and start watching this screen id
+    waitForScreenId(presentationCode);
   }
+
+  var unlisten = null;
+
+  function doUnlisten() {
+    if(unlisten != null) {
+      unlisten();
+    }
+  }
+  /**
+   * Watches Firebase for this screen ID to get pointed to a user.
+   */
+  function waitForScreenId(sid) {
+
+    doUnlisten();
+
+    $("#number").text(sid);
+
+    //Now create a Firebase reference to watch the screen ID
+    var screenRoot = dataRoot.child("screens").child(sid);
+
+
+      var func = screenRoot.on("value", function(uidSnap) {
+        var uid = uidSnap.val();
+        if(uid != null) {
+          $("#initContainer").hide();
+          $("#carouselContainer").show();
+          displayCarousel(dataRoot.child("users").child(uid), $("#myCarousel"), $("#slideHolder"));
+          doUnlisten();
+        }
+      });
+      unlisten = function() {
+        screenRoot.off("value", func);
+      }
+
+  }
+
+  dataRoot.child("screens").child(screenId).remove(function() {
+    waitForScreenId(screenId);
+  });
 
 </script>
 </body>
