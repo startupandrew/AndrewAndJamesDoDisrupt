@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<div id="imageshere" style="border: 1px solid green"></div>
+<div id="imageshere" style="border: 1px solid green; height: 48px; width: 98%;"></div>
 <a href="#" onclick="loadImages()">Load Images</a> <br />
 
 <input type="text" id="screenid" /> <a href="#" onclick="pushToScreen()">Show On Screen</a>
@@ -30,7 +30,7 @@
   </div>
 </div>
 
-<a onclick="slideSlides(1)">Left</a> <a onclick="slideSlides(-1)">Right</a>
+<a onclick="slideSlides(-1)">Left</a> <a onclick="slideSlides(1)">Right</a>
 
 <script type="text/javascript">
 
@@ -71,7 +71,7 @@
   }
 
   mySlides.on("child_added", function(d) {
-    $('#imageshere').prepend('<p>' + d.val() + '</p>');
+    $('#imageshere').append('<img src="' + d.val() + '" style="width: 64px; height: 48px;">');
   });
 
   //show the carousel
@@ -88,7 +88,7 @@
   });
 
   var slidePosRef = userDataRoot.child("position/slide");
- // slidePosRef.set(currentSlidePos);
+  slidePosRef.set(currentSlidePos);
 
   //And bind to swipe events
   $('#myCarousel').bind('swipetwo',function(ev, evInf) {
