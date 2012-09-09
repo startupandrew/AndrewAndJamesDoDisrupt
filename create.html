@@ -120,8 +120,6 @@
       slideSlides(1);
     } else if(evInf.description.indexOf("right") >= 0) {
       slideSlides(-1);
-    } else {
-      alert("What the deuce: " + evInf.description);
     }
   });
 
@@ -139,11 +137,9 @@
 
   var lastPos = null;
 
-
   $('#myCarousel').bind('swipemove',function(ev, evInf) {
-    var newPos = {x: evInf.delta[0].lastX, y: evInf.delta[0].lastY};
-    if(lastPos != null) {
-      console.log("qqq: " + newPos.x + " " + newPos.y)
+    var newPos = {x: evInf.originalEvent.offsetX, y: evInf.originalEvent.offsetY};
+    if(lastPos != null && (lastPos.x + evInf.delta[0].lastX) === newPos.x) {
       userSlideDrawing.push({old: lastPos, new: newPos});
     }
     lastPos = newPos;
