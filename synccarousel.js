@@ -11,12 +11,10 @@ displayCarousel = function(userdata, carousel, slideholder) {
     interval: false
   });
 
-
-
   var slides = userdata.child("slides");
   slides.on("child_added", function(urlSnap) {
     var imgURL = urlSnap.val();
-    slideholder.append("<div class='item'><img src='" + imgURL + "' style='width: 300px; height: 250px;'></div>");
+    slideholder.append("<div class='item'><img src='" + imgURL + "' style='width: 100%; height: 100%;'></div>");
     carousel.carousel("next");
   });
 

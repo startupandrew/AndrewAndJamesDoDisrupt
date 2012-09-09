@@ -15,13 +15,10 @@
 </head>
 <body>
 
-<div id="myCarousel" class="carousel slide hide" style="width: 400px; height: 300px; border: 1px solid green;">
+<div id="myCarousel" class="carousel slide hide" style="width: 640px; height: 480px; border: 1px solid black;">
   <!-- Carousel items -->
   <div id="slideHolder" class="carousel-inner">
   </div>
-  <!-- Carousel nav -->
-  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 </div>
 
 <div id="screencodeholder"></div>
@@ -45,7 +42,7 @@
   //Now create a Firebase reference to watch the screen ID
   var screenRoot = dataRoot.child("screens").child(screenId);
 
-  
+
   screenRoot.remove(function() {
     var func = screenRoot.on("value", function(uidSnap) {
       var uid = uidSnap.val();
