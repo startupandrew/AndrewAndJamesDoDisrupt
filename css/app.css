@@ -19,7 +19,7 @@
   border-radius: 10px;
   border: 1px solid #ccc;
   background: #eee;
-  margin-top: 35px;
+  margin-top: 20px;
   margin-bottom: 5px;
   padding: 15px 0;
 }
@@ -38,4 +38,11 @@
   padding: 5px;
   font-size: 12px;
   color: #777;
+}
+.createPresentation {
+  font-size: 24px;
+  padding-top: 19px;
+}
+.or {
+  padding-top: 20px;
 }
