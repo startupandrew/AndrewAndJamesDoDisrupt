@@ -7,11 +7,6 @@
 
   <!-- Le styles -->
   <link href="css/bootstrap.css" rel="stylesheet">
-  <style>
-    body {
-      padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-    }
-  </style>
   <link href="css/bootstrap-responsive.css" rel="stylesheet">
   <link href="css/app.css" rel="stylesheet">
 
@@ -29,25 +24,34 @@
 
   <!-- Scripts -->
   <script src="js/gen_validatorv4.js" type="text/javascript"></script>
-
-
 </head>
 
 <body>
 
 <div class="container">
   <div class="row pagination-centered">
-      <img src="img/plug.png" />
+      <img src="img/plug.png" class="logo" />
   </div>
-  <div class="row pagination-centered">
-      <span class="pronpt">Enter Code:</span>
+  <div class="row">
+    <span class="span6 offset3 pagination-centered mainOutline">
+      <p class="pronpt">Join a presentation by entering your code:</p>
+      <input type="text" id="codeEntry1" class="codeEntry" name="codeEntry1" maxlength="1" />
+      <input type="text" id="codeEntry2" class="codeEntry" name="codeEntry2" maxlength="1" />
+      <input type="text" id="codeEntry3" class="codeEntry" name="codeEntry3" maxlength="1" />
+      <input type="text" id="codeEntry4" class="codeEntry" name="codeEntry4" maxlength="1" />
+    </span>
   </div>
-  <div class="row pagination-centered">
-    <input type="text" id="codeEntry1" class="codeEntry" name="codeEntry1" maxlength="1" />
-    <input type="text" id="codeEntry2" class="codeEntry" name="codeEntry2" maxlength="1" />
-    <input type="text" id="codeEntry3" class="codeEntry" name="codeEntry3" maxlength="1" />
-    <input type="text" id="codeEntry4" class="codeEntry" name="codeEntry4" maxlength="1" />
+  <div class="row">
+    <span class="span6 pagination-centered">
+      <span class="pronpt">Make Screen:</span>
+      <input type="button" id="createPresentation" name="makeScreen" />
+    </span>
+    <span class="span6 pagination-centered">
+      <span class="pronpt">Make Screen:</span>
+      <input type="button" id="makeScreen" name="makeScreen" />
+    </span>
   </div>
+
 </div> <!-- /container -->
 
 <!-- Le javascript
@@ -58,7 +62,7 @@
     var a = [];
     var k = e.which;
 
-    for (i = 48; i < 58; i++) {
+    for (i = 46; i < 58; i++) {
       a.push(i);
     }
 
@@ -66,26 +70,37 @@
     {
       e.preventDefault();
     }
-
-    //Move to the next textBox
-    console.log(e.keyCode);
-
-    var gotoNext = true;
-    if (e.keyCode === 12)
+    else
     {
-      gotoNext = false;
+      //Move to the next textBox
+      shiftFocus(e.currentTarget.id);
     }
+  });
 
-    shiftFocus(e.currentTarget.id, gotoNext);
+  //Check when we've entered the code, then called loadPresentation
+  $(function() {
+    var content = $("#" + entryBoxList[entryBoxList.length - 1]).val();
 
+    $("#" + entryBoxList[entryBoxList.length - 1]).keyup(function() {
+      if ($("#" + entryBoxList[entryBoxList.length - 1]).val() != content) {
+        content = $("#" + entryBoxList[entryBoxList.length - 1]).val();
+        var presentationCode = "";
+        for ( var j = 0; j < entryBoxList.length; j++ )
+        {
+          presentationCode += $("#" + entryBoxList[j]).val();
+        }
+        loadPresentation(presentationCode);
+      }
+    });
   });
 
   var entryBoxList = ["codeEntry1", "codeEntry2", "codeEntry3", "codeEntry4"];
 
-  function shiftFocus(fromField, gotoNext)
+  function shiftFocus(fromField)
   {
     for ( var i = 0; i < entryBoxList.length; i++)
     {
+      //Move focus to the next text box
       if ( fromField === entryBoxList[i] )
       {
         $("#" + entryBoxList[i+1]).focus();
@@ -96,6 +111,11 @@
   $(function(){
     $("#" + entryBoxList[0]).focus();
   });
+
+  function loadPresentation(presentationCode) {
+    //TODO: Andrew, put the code to run the presentation here.
+    console.log(presentationCode);
+  }
 
 </script>
 </body>

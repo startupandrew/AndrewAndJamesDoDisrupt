@@ -4,13 +4,22 @@
  * Made at TC Disrupt SF 2012 by @JamesTamplin
  */
 
-#wrapper {
-  margin: 0 auto;
-  text-align: center;
+.logo {
+  margin: 50px 0;
 }
-
+.pronpt {
+  font-size: 16px;
+}
 .codeEntry {
   font-size: 30px !important;
   width: 20px;
   padding: 12px 15px !important;
+}
+.mainOutline {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: #eee;
+  margin-top: 35px;
+  margin-bottom: 35px;
+  padding: 15px 0;
 }
