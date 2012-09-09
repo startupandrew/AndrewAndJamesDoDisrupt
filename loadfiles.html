@@ -1,0 +1,57 @@
+<html>
+<head>
+  <title>Unplugged</title>
+  <script type="text/javascript" src="http://static.firebase.com/v0/firebase.js"></script>
+  <script type="text/javascript" src="http://www.firebase.com/js/libs/jquery-1.7.1.js"></script>
+  <script type="text/javascript" src="http://www.firebase.com/submarine/js/libs/json2.min.js"></script>
+</head>
+<body>
+Hello world!xxx
+
+<div>
+  <span>Warning: This will overwrite all of your existing data!</span><br/>
+
+  <div>
+    <input id="importfileuploader" type="file">
+  </div>
+  <a href="#" class="button yellow" id="importconfirm">Import File</a>
+</div>
+
+
+<script>
+
+  if (window.FileReader) {
+    var uploadHandler = function () {
+      var reader = new FileReader();
+      alert("I do html5 files");
+      reader.onload = function (event) {
+        $('#importSpinner').show();
+        // Defer set to make sure spinner shows up.
+        setTimeout(function () {
+          firebaseRef.set(jsonData, function () {
+            $('#importmodal').modal('hide');
+            $('#importSpinner').hide();
+            prepareModal();
+          });
+        }, 0);
+      };
+      var file = $('#importfileuploader').get()[0].files[0];
+      reader.readAsText(file, "UTF-8");
+    };
+    $("#importconfirm").on('click', function (e) {
+      e.preventDefault();
+      alert("got here");
+      uploadHandler();
+    });
+  } else {
+    alert("no html5 file api on this browser");
+  }
+
+  //function set(fn) {
+  //  return fn;
+  //}
+  //$(document).ready(set(go));
+
+</script>
+</body>
+</html>
