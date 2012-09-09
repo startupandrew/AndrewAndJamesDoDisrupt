@@ -5,15 +5,24 @@
   <script type="text/javascript" src="http://www.firebase.com/js/libs/jquery-1.7.1.js"></script>
   <script type="text/javascript" src="http://www.firebase.com/submarine/js/libs/json2.min.js"></script>
   <script type="text/javascript" src="jquery.cookie.js"></script>
+  <script type="text/javascript" src="synccarousel.js.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/bootstrap-carousel.js"></script>
+
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/bootstrap-responsive.css" rel="stylesheet">
+  <link href="css/app.css" rel="stylesheet">
 
   <!-- Adds the Filepicker.io javascript library to the page -->
   <script src="https://api.filepicker.io/v0/filepicker.js"></script>
 </head>
 <body>
 
-This is what the ipad will see.
+<div id="imageshere" style="border: 1px solid green"></div>
+<a href="#" onclick="loadImages()">Load Images</a> <br /><br />
 
-
+<input type="text" id="screenid" /><br />
+<a href="#" onclick="pushToScreen()">Show On Screen</a>
 
 <script type="text/javascript">
 
@@ -26,15 +35,19 @@ This is what the ipad will see.
     $.cookie('usercookie', userCookie);
   }
 
+  //Root of the firebase data
+  var dataRoot = new Firebase("http://gamma.firebase.com/unplugged/");
+
   //Now create a Firebase reference to the user data.
-  var userDataRoot = new Firebase("http://gamma.firebase.com/unplugged/users/" + userCookie);
+  var userDataRoot = dataRoot.child("users").child(userCookie);
 
   //
   var mySlides = userDataRoot.child("slides");
 
   //Setting up Filepicker.io with your api key
   filepicker.setKey('ARQRH6T9hQi2MVv87Hnnfz');
-  function doit() {
+
+  function loadImages() {
     filepicker.getFile('image/*', {'multiple': true}, function(response){
       for(var i =0; i < response.length; i++) {
         var img = response[i];
@@ -43,15 +56,20 @@ This is what the ipad will see.
     });
   }
 
+  function pushToScreen() {
+    var screenId = $("#screenid").val();
+    var screenRoot = dataRoot.child("screens").child(screenId);
+    screenRoot.set(userCookie);
+  }
+
   mySlides.on("child_added", function(d) {
     $('#imageshere').prepend('<p>' + d.val() + '</p>');
   });
 </script>
 
-<a href="#" onclick="doit()">Click</a>
 
-<div id="imageshere">
 
-</div>
+
+
 </body>
 </html>
