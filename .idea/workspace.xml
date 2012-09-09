@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="204e4d92-bd6b-4bdc-b929-9fbe4b01574a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/app.css" afterPath="$PROJECT_DIR$/css/app.css" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/displayfiles.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="AndrewAndJamesDoDisrupt.iws" />
@@ -73,7 +73,7 @@
       <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="30" selection-start="346" selection-end="346" vertical-scroll-proportion="0.23504274">
+            <state line="62" column="26" selection-start="2650" selection-end="2650" vertical-scroll-proportion="0.61538464">
               <folding />
             </state>
           </provider>
@@ -528,7 +528,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="30" selection-start="346" selection-end="346" vertical-scroll-proportion="0.23504274">
+        <state line="62" column="26" selection-start="2650" selection-end="2650" vertical-scroll-proportion="0.61538464">
           <folding />
         </state>
       </provider>
